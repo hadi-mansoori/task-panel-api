@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreTaskRequest extends FormRequest
+class UpdateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','unique:tasks,name'],
+            'name' => ['sometimes','string','unique:users,id,'.request('taskId')],
             'description' => ['sometimes','string'],
             'assigned_id' => ['sometimes','nullable','exists:users,id'],
             'status' => ['sometimes',Rule::in(['todo','in-progress','suspended','cancelled','done'])]

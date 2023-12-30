@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1/task')->middleware('auth:api')->group(function (){
     Route::post('/',[TaskPanelController::class,'store']);
+    Route::put('/update/{taskId}',[TaskPanelController::class,'update']);
 
 });

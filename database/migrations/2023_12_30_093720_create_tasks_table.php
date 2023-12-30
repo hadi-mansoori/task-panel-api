@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('description');
-            $table->enum('status',['todo','in-progress','suspended','cancelled','done'])
-                ->default('todo');
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
+            $table->enum('status',['todo','in-progress','suspended','cancelled','done'])->default('todo');
+            $table->foreignId('reporter_id')
+                ->constrained('users')
+                ->onUpdate('cascade');
+
+            $table->bigInteger('assigned_id')->nullable();
             $table->timestamps();
         });
     }

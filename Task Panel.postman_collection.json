@@ -1,0 +1,390 @@
+{
+	"info": {
+		"_postman_id": "5cd2ec8e-682c-4150-b562-ac257689aca2",
+		"name": "Task Panel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27094582"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "email",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "user_email",
+							"value": "eh.mansoori@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "user_password",
+							"value": "12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/oauth/token",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "create task API",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "description",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "",
+							"description": "['todo','in-progress','suspended','cancelled','done']",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "assigned_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/task",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"task"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "create task API",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"description": "['todo','in-progress','suspended','cancelled','done']",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "assigned_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/task",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"task"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 31 Dec 2023 09:54:07 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 31 Dec 2023 09:54:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.4"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"create task API\",\n        \"assigned\": {\n            \"id\": 1,\n            \"name\": \"سید هادی\",\n            \"email\": \"eh.mansoori@gmail.com\",\n            \"email_verified_at\": null,\n            \"created_at\": \"2023-12-31T09:53:09.000000Z\",\n            \"updated_at\": \"2023-12-31T09:53:09.000000Z\"\n        },\n        \"description\": \"description\",\n        \"status\": null,\n        \"created_at\": \"2023-12-31T09:54:07.000000Z\",\n        \"updated_at\": \"2023-12-31T09:54:07.000000Z\"\n    },\n    \"message\": \"Task has been created.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "description",
+							"value": "description 2",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "todo",
+							"description": "['todo','in-progress','suspended','cancelled','done']",
+							"type": "text"
+						},
+						{
+							"key": "assigned_id",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/task/update/3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"task",
+						"update",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Task",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "description 2",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "done",
+									"description": "['todo','in-progress','suspended','cancelled','done']",
+									"type": "text"
+								},
+								{
+									"key": "assigned_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/task/update/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"task",
+								"update",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 31 Dec 2023 09:43:04 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 31 Dec 2023 09:43:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.4"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "56"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {\n        \"id\": 3,\n        \"name\": \"create task API with versioning 1\",\n        \"assigned\": {\n            \"id\": 1,\n            \"name\": \"\",\n            \"email\": \"eh.mansoori@gmail.com\",\n            \"email_verified_at\": null,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        \"description\": \"description 2\",\n        \"status\": \"done\",\n        \"created_at\": \"2023-12-15T12:27:12.000000Z\",\n        \"updated_at\": \"2023-12-31T09:43:04.000000Z\"\n    },\n    \"message\": \"Task has been updated.\"\n}"
+				}
+			]
+		}
+	]
+}

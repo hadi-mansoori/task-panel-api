@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Events\TaskStatusUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\TaskPanel\StoreTaskRequest;
 use App\Http\Requests\Api\V1\TaskPanel\UpdateTaskRequest;
@@ -16,6 +17,7 @@ class TaskPanelController extends Controller
 {
     /**
      * @param StoreTaskRequest $request
+     * @param TaskRepository $taskRepository
      * @return JsonResponse
      */
     public function store(StoreTaskRequest $request,TaskRepository $taskRepository): JsonResponse
@@ -42,8 +44,11 @@ class TaskPanelController extends Controller
             return Response::notFound(__('taskpanel.not_found'));
         }
 
+        if($task->status != $request->input('status')) {
+            event(new TaskStatusUpdated($task->id, $task->status));
+        }
+
         $taskRepository->update($task,$validated);
         return Response::success(new TaskResource($task->load('assignedUser')),__('taskpanel.updated'));
     }
-
 }
